@@ -1,9 +1,13 @@
 {
   "author": {
     "name": "Yehor Sergeenko",
-    "email": "<yehor.sergeenko@gmail.com>",
-    "url": "http://github.com/bricss/"
+    "email": "yehor.sergeenko@gmail.com",
+    "url": "http://github.com/bricss"
   },
+  "bugs": {
+    "url": "https://github.com/bricss/aspect/issues"
+  },
+  "contributors": [],
   "dependencies": {
     "gulp": "*",
     "gulp-clean": "*",
@@ -15,7 +19,8 @@
   "engines": {
     "node": ">= 0.10.x"
   },
-  "keywords": "",
+  "homepage": "https://github.com/bricss/aspect",
+  "keywords": [],
   "license": "ISC",
   "name": "aspect",
   "private": false,
