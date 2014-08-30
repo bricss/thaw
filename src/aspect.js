@@ -42,16 +42,16 @@
   };
 
   /**
-   * Run the function as soon as it's called, but prevent further calls during `delay` ms
-   * Example: function.throttle(100) will only run function() once every 100 ms.
+   * Run the function's cascade and pass arguments through all callback's after major function invocation.
+   * Example: function.cascade(fn1, fn2, .., fnN) will run callback's immediately after function() execution.
    */
-  Function.prototype.throttle = function(threshold) {
-    var fn = this, timeout;
+  Function.prototype.cascade = function() {
+    var args, seq = [this].concat([].slice.call(arguments));
     return function() {
-      timeout = (!timeout) && window.setTimeout(function() {
-        timeout = window.clearTimeout(timeout);
-        fn.apply(this, arguments);
-      }.bind(this), threshold || 0);
+      for (var i = 0; i < seq.length; i++) {
+        args = !args ? seq[i].apply(this, arguments) : seq[i].call(this, args);
+      }
+      return args;
     };
   };
 
@@ -64,6 +64,20 @@
     return function() {
       window.clearTimeout(timeout);
       timeout = window.setTimeout(function() {
+        fn.apply(this, arguments);
+      }.bind(this), threshold || 0);
+    };
+  };
+
+  /**
+   * Run the function as soon as it's called, but prevent further calls during `delay` ms
+   * Example: function.throttle(100) will only run function() once every 100 ms.
+   */
+  Function.prototype.throttle = function(threshold) {
+    var fn = this, timeout;
+    return function() {
+      timeout = (!timeout) && window.setTimeout(function() {
+        timeout = window.clearTimeout(timeout);
         fn.apply(this, arguments);
       }.bind(this), threshold || 0);
     };

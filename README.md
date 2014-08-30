@@ -5,26 +5,30 @@ The narrow belt for AOP.
 
 Usage:
 ~~~ javascript
-var result = (function(val) {
+var around = (function(val) {
     return val + 1;
   }.around(function(val) {
     return val + val;
-  }))(1);
-console.log('`Around` Test:', (result === 6 ? '[PASSED]' : '[FAILED]'), result);
+  }));
 
-var result = (function(val) {
+var after = (function(val) {
     return val + 1;
   }.after(function(val) {
     return val + val;
-  }))(1);
-console.log('`After` Test:', (result === 4 ? '[PASSED]' : '[FAILED]'), result);
+  }));
 
-var result = (function(val) {
+var before = (function(val) {
     return val + 1;
   }.before(function(val) {
     return val + val;
-  }))(1);
-console.log('`Before` Test:', (result === 3 ? '[PASSED]' : '[FAILED]'), result);
+  }));
+
+var cascade = around.cascade(around, after, before);
+
+console.assert.before(function(){ return around(1) === 6; }).call(console, console.log('`Around`'));
+console.assert.before(function(){ return after(1) === 4; }).call(console, console.log('`After`'));
+console.assert.before(function(){ return before(1) === 3; }).call(console, console.log('`Before`'));
+console.assert.before(function(){ return cascade(1) === 109; }).call(console, console.log('`Cascade`'));
 
 var pib = 0;
 var torque = function() {
@@ -40,7 +44,7 @@ setTimeout(torque, 350);
 // will fire ^
 setTimeout(torque, 400);
 setTimeout(function() {
-  console.log('`Throttle` Test:', (pib === 3 ? '[PASSED]' : '[FAILED]'), pib);
+  console.assert.before(function(){ return pib === 3; }).call(console, console.log('`Throttle`'));
 }, 1000);
 
 var bip = 0;
@@ -56,6 +60,6 @@ setTimeout(bounce, 350);
 // will fire ^
 setTimeout(bounce, 400);
 setTimeout(function() {
-  console.log('`Debounce` Test:', (bip === 2 ? '[PASSED]' : '[FAILED]'), bip);
+  console.assert.before(function(){ return bip === 2; }).call(console, console.log('`Debounce`'));
 }, 1000);
 ~~~
