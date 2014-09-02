@@ -5,23 +5,23 @@ The narrow belt for AOP.
 
 Usage:
 ~~~ javascript
-var around = (function(val) {
+var around = function(val) {
     return val + 1;
   }.around(function(val) {
     return val + val;
-  }));
+  });
 
-var after = (function(val) {
+var after = function(val) {
     return val + 1;
   }.after(function(val) {
     return val + val;
-  }));
+  });
 
-var before = (function(val) {
+var before = function(val) {
     return val + 1;
   }.before(function(val) {
     return val + val;
-  }));
+  });
 
 var cascade = around.cascade(around, after, before);
 
