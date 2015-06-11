@@ -23,7 +23,7 @@ var before = function(val) {
     return val + val;
   });
 
-var cascade = around.cascade(around, after, before);
+var waterfall = around.waterfall(around, after, before);
 
 console.assert.before(function() {
   return around(1) === 6;
@@ -38,7 +38,7 @@ console.assert.before(function() {
 }).call(console, console.log('`Before`'));
 
 console.assert.before(function() {
-  return cascade(1) === 109;
+  return waterfall(1) === 109;
 }).call(console, console.log('`Cascade`'));
 
 var pib = 0;

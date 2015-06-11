@@ -42,10 +42,10 @@
   };
 
   /**
-   * Run the function's cascade and pass arguments through all callback's after major function invocation.
-   * Example: function.cascade(fn1, fn2, .., fnN) will run callback's immediately after function() execution.
+   * Run the function's waterfall and pass arguments through all callback's after major function invocation.
+   * Example: function.waterfall(fn1, fn2, .., fnN) will run callback's immediately after function() execution.
    */
-  Function.prototype.cascade = function() {
+  Function.prototype.waterfall = function() {
     var args, seq = [this].concat([].slice.call(arguments));
     return function() {
       for (var i = 0; i < seq.length; i++) {
