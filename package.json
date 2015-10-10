@@ -5,7 +5,7 @@
     "url": "http://github.com/bricss"
   },
   "bugs": {
-    "url": "https://github.com/bricss/aspect/issues"
+    "url": "https://github.com/bricss/thaw/issues"
   },
   "contributors": [],
   "dependencies": {
@@ -17,17 +17,17 @@
   },
   "description": "The narrow belt for AOP.",
   "engines": {
-    "iojs": ">=1.8.x",
-    "node": ">=0.12.x"
+    "node": ">=4.0.0"
   },
-  "homepage": "https://github.com/bricss/aspect",
-  "keywords": [],
+  "homepage": "https://github.com/bricss/thaw",
+  "keywords": ["aop", "aspect"],
   "license": "ISC",
-  "name": "aspect",
+  "main": "src/thaw.js",
+  "name": "thaw",
   "private": false,
   "repository": {
     "type": "git",
-    "url": "https://github.com/bricss/aspect.git"
+    "url": "https://github.com/bricss/thaw.git"
   },
   "scripts": {
     "preinstall": "npm install gulp -g",

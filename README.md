@@ -1,50 +1,39 @@
-Aspect.js
+Thaw.js
 =======
 
 The narrow belt for AOP.
 
 Usage:
 ~~~ javascript
-var around = function(val) {
+var around = thaw.around(function(val) {
     return val + 1;
-  }.around(function(val) {
+  }, function(val) {
     return val + val;
   });
 
-var after = function(val) {
+var after = thaw.after(function(val) {
     return val + 1;
-  }.after(function(val) {
+  }, function(val) {
     return val + val;
   });
 
-var before = function(val) {
+var before = thaw.before(function(val) {
     return val + 1;
-  }.before(function(val) {
+  }, function(val) {
     return val + val;
   });
 
-var waterfall = around.waterfall(around, after, before);
+var waterfall = thaw.waterfall(around, after, before);
 
-console.assert.before(function() {
-  return around(1) === 6;
-}).call(console, console.log('`Around`'));
-
-console.assert.before(function() {
-  return after(1) === 4;
-}).call(console, console.log('`After`'));
-
-console.assert.before(function() {
-  return before(1) === 3;
-}).call(console, console.log('`Before`'));
-
-console.assert.before(function() {
-  return waterfall(1) === 109;
-}).call(console, console.log('`Cascade`'));
+console.assert(around(1) === 6, 'around');
+console.assert(after(1) === 4, 'after');
+console.assert(before(1) === 3, 'before');
+console.assert(waterfall(1) === 109, 'waterwall');
 
 var pib = 0;
-var torque = function() {
+var torque = thaw.throttle(function() {
   pib++;
-}.throttle(100);
+}, 100);
 setTimeout(torque, 0);
 // will fire ^
 setTimeout(torque, 100);
@@ -55,15 +44,13 @@ setTimeout(torque, 350);
 // will fire ^
 setTimeout(torque, 400);
 setTimeout(function() {
-  console.assert.before(function() {
-    return pib === 3;
-  }).call(console, console.log('`Throttle`'));
+  console.assert(pib === 3, 'throttle');
 }, 1000);
 
 var bip = 0;
-var bounce = function() {
+var bounce = thaw.debounce(function() {
   bip++;
-}.debounce(100);
+}, 100);
 setTimeout(bounce, 0);
 setTimeout(bounce, 100);
 setTimeout(bounce, 250);
@@ -73,8 +60,6 @@ setTimeout(bounce, 350);
 // will fire ^
 setTimeout(bounce, 400);
 setTimeout(function() {
-  console.assert.before(function() {
-    return bip === 2;
-  }).call(console, console.log('`Debounce`'));
+  console.assert(bip === 2, 'debounce');
 }, 1000);
 ~~~
