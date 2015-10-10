@@ -17,8 +17,7 @@
   }
 })(this, function(exports) {
   'use strict';
-  var thaw = Object.create(null);
-  Object.defineProperties(thaw, {
+  var thaw = Object.defineProperties(Object.create(null), {
     around : {
       enumerable : true,
       value : function(fn, callback) {
