@@ -23,12 +23,12 @@ var before = thaw.before((val) => {
     return val + val;
   });
 
-var waterfall = thaw.waterfall(around, after, before);
+var compose = thaw.compose(around, after, before);
 
 console.assert(around(1) === 6, 'around');
 console.assert(after(1) === 4, 'after');
 console.assert(before(1) === 3, 'before');
-console.assert(waterfall(1) === 29, 'waterwall');
+console.assert(compose(1) === 29, 'compose');
 
 var pib = 0;
 var torque = thaw.throttle(() => {
