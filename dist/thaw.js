@@ -16,7 +16,7 @@
   } else {
     factory(root);
   }
-})(self, function (exports) {
+})((0, eval)('this'), function (exports) {
   exports.thaw = Object.defineProperties(Object.create(null), {
     around: {
       enumerable: true,
@@ -66,7 +66,7 @@
         };
       }
     },
-    waterfall: {
+    compose: {
       enumerable: true,
       value: function value(fn, callback) {
         for (var _len4 = arguments.length, args = Array(_len4 > 2 ? _len4 - 2 : 0), _key4 = 2; _key4 < _len4; _key4++) {
@@ -74,8 +74,8 @@
         }
 
         /**
-         * Run the function's waterfall and pass arguments through all callback's after major function invocation.
-         * Example: function.waterfall(fn1, fn2, .., fnN) will run callback's immediately after function() execution.
+         * Run the function's compose and pass arguments through all callback's after major function invocation.
+         * Example: function.compose(fn1, fn2, .., fnN) will run callback's immediately after function() execution.
          */
         var seq = [fn, callback].concat(args);
         return function () {
@@ -85,7 +85,7 @@
 
           args = null;
           for (var i = 0; i < seq.length; i++) {
-            args = !args ? seq[i].apply(fn, tail) : seq[i].call(fn, args);
+            args = args ? seq[i].call(fn, args) : seq[i].apply(fn, tail);
           }
           return args;
         };

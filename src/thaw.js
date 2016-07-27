@@ -14,7 +14,7 @@
   } else {
     factory(root);
   }
-})(self, (exports) => {
+})((0, eval)('this'), (exports) => {
   exports.thaw = Object.defineProperties(Object.create(null), {
     around: {
       enumerable: true,
