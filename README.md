@@ -1,65 +1,48 @@
-Thaw.js
-=======
+The narrow belt for AOP 🎀
+----
+This package provides narrow methods for aspect-oriented programming (AOP).
 
-The narrow belt for AOP.
+## Prerequisites
+* Node.js `>= 14.13.x`
 
-Usage:
-~~~ javascript
-var around = thaw.around((val) => {
-    return val + 1;
-  }, (val) => {
-    return val + val;
-  });
+## Installation
+```shell
+npm install thaw --save
+```
 
-var after = thaw.after((val) => {
-    return val + 1;
-  }, (val) => {
-    return val + val;
-  });
+### Usage
+```javascript
+import * as thaw from 'thaw';
 
-var before = thaw.before((val) => {
-    return val + 1;
-  }, (val) => {
-    return val + val;
-  });
-
-var compose = thaw.compose(around, after, before);
+const around = thaw.around((val) => val + 1, (val) => val + val);
+const after = thaw.after((val) => val + 1, (val) => val + val);
+const before = thaw.before((val) => val + 1, (val) => val + val);
+const compose = thaw.compose(around, after, before);
 
 console.assert(around(1) === 6, 'around');
 console.assert(after(1) === 4, 'after');
 console.assert(before(1) === 3, 'before');
 console.assert(compose(1) === 29, 'compose');
 
-var pib = 0;
-var torque = thaw.throttle(() => {
-  pib++;
-}, 100);
-setTimeout(torque, 0);
-// will fire ^
-setTimeout(torque, 100);
-setTimeout(torque, 250);
-// will fire ^
-setTimeout(torque, 300);
-setTimeout(torque, 350);
-// will fire ^
-setTimeout(torque, 400);
-setTimeout(() => {
-  console.assert(pib === 3, 'throttle');
-}, 1000);
+let bip = 0;
+const debounce = thaw.debounce(() => bip++, 100);
 
-var bip = 0;
-var bounce = thaw.debounce(() => {
-  bip++;
-}, 100);
-setTimeout(bounce, 0);
-setTimeout(bounce, 100);
-setTimeout(bounce, 250);
-// will fire ^
-setTimeout(bounce, 300);
-setTimeout(bounce, 350);
-// will fire ^
-setTimeout(bounce, 400);
-setTimeout(() => {
-  console.assert(bip === 2, 'debounce');
-}, 1000);
-~~~
+setTimeout(debounce, 0);
+setTimeout(debounce, 100);
+setTimeout(debounce, 250); // will fire
+setTimeout(debounce, 300);
+setTimeout(debounce, 350); // will fire
+setTimeout(debounce, 400);
+setTimeout(() => console.assert(bip === 2, 'debounce'), 1000);
+
+let pib = 0;
+const throttle = thaw.throttle(() => pib++, 100);
+
+setTimeout(throttle, 0); // will fire
+setTimeout(throttle, 100);
+setTimeout(throttle, 250); // will fire
+setTimeout(throttle, 300);
+setTimeout(throttle, 350); // will fire
+setTimeout(throttle, 400);
+setTimeout(() => console.assert(pib === 3, 'throttle'), 1000);
+```

@@ -7,38 +7,49 @@
   "bugs": {
     "url": "https://github.com/bricss/thaw/issues"
   },
-  "contributors": [],
-  "dependencies": {
-    "babel-preset-es2015": "*",
-    "babel-preset-es2016": "*",
-    "gulp": "*",
-    "gulp-babel": "*",
-    "gulp-rename": "*",
-    "gulp-uglify": "*"
+  "devDependencies": {
+    "@babel/cli": "^7.11.6",
+    "@babel/core": "^7.11.6",
+    "@babel/eslint-parser": "^7.11.5",
+    "@babel/plugin-transform-modules-commonjs": "^7.10.4",
+    "@babel/plugin-transform-runtime": "^7.11.5",
+    "@babel/preset-env": "^7.11.5",
+    "c8": "^7.3.1",
+    "eslint": "^7.10.0",
+    "eslint-config-ultra-refined": "^1.0.27",
+    "mocha": "^8.1.3"
   },
-  "description": "The narrow belt for AOP.",
+  "description": "The narrow belt for AOP 🎀",
   "engines": {
-    "node": ">=4.0.0"
+    "node": ">=14.13.0"
   },
-  "homepage": "https://github.com/bricss/thaw",
+  "exports": {
+    "import": "./src/thaw.mjs",
+    "require": "./dist/thaw.js"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "homepage": "https://github.com/bricss/thaw#readme",
   "keywords": [
     "aop",
-    "aspect"
+    "aspect",
+    "oriented-oriented"
   ],
-  "license": "ISC",
-  "main": "src/thaw.js",
+  "license": "MIT",
+  "main": "./dist/thaw.js",
   "name": "thaw",
-  "private": false,
   "repository": {
     "type": "git",
     "url": "https://github.com/bricss/thaw.git"
   },
   "scripts": {
-    "preinstall": "npm install gulp -g",
-    "postinstall": "npm cache clean",
-    "postupdate": "npm prune",
-    "start": "gulp",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npx babel src -d dist",
+    "lint": "eslint ./src --ext .cjs,.js,.mjs",
+    "prepack": "npm run build",
+    "test": "mocha --exit",
+    "test:cover": "c8 --include=src --report-dir=coverage --reporter=lcov --reporter=text npm test"
   },
-  "version": "1.1.0"
+  "version": "2.0.0"
 }
