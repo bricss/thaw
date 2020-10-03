@@ -6,7 +6,7 @@ import {
   compose,
   debounce,
   throttle,
-} from '../src/thaw.mjs';
+} from '../src/index.mjs';
 
 describe('thaw', () => {
 

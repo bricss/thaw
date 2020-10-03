@@ -24,8 +24,8 @@
     "node": ">=14.13.0"
   },
   "exports": {
-    "import": "./src/thaw.mjs",
-    "require": "./dist/thaw.js"
+    "import": "./src/index.mjs",
+    "require": "./dist/index.js"
   },
   "files": [
     "dist",
@@ -35,10 +35,10 @@
   "keywords": [
     "aop",
     "aspect",
-    "oriented-oriented"
+    "aspect-oriented"
   ],
   "license": "MIT",
-  "main": "./dist/thaw.js",
+  "main": "./dist/index.js",
   "name": "thaw",
   "repository": {
     "type": "git",
@@ -46,10 +46,10 @@
   },
   "scripts": {
     "build": "npx babel src -d dist",
-    "lint": "eslint ./src --ext .cjs,.js,.mjs",
+    "lint": "eslint src --ext .cjs,.js,.mjs",
     "prepack": "npm run build",
     "test": "mocha --exit",
     "test:cover": "c8 --include=src --report-dir=coverage --reporter=lcov --reporter=text npm test"
   },
-  "version": "2.0.0"
+  "version": "2.0.1"
 }
