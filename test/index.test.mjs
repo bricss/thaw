@@ -12,11 +12,7 @@ describe('thaw', () => {
 
   describe('around', () => {
     it('should call callback around a function', () => {
-      const fnc = around((val) => {
-        return val + 1;
-      }, (val) => {
-        return val + val;
-      });
+      const fnc = around((val) => val + 1, (val) => val + val);
 
       assert.strictEqual(fnc(1), 6);
     });
@@ -24,11 +20,7 @@ describe('thaw', () => {
 
   describe('after', () => {
     it('should call callback after a function', () => {
-      const fnc = after((val) => {
-        return val + 1;
-      }, (val) => {
-        return val + val;
-      });
+      const fnc = after((val) => val + 1, (val) => val + val);
 
       assert.strictEqual(fnc(1), 4);
     });
@@ -36,18 +28,14 @@ describe('thaw', () => {
 
   describe('before', () => {
     it('should call callback before a function', () => {
-      const fnc = before((val) => {
-        return val + 1;
-      }, (val) => {
-        return val + val;
-      });
+      const fnc = before((val) => val + 1, (val) => val + val);
 
       assert.strictEqual(fnc(1), 3);
     });
   });
 
   describe('compose', () => {
-    it('should call functions in sequence', () => {
+    it('should call functions in left-to-right (pipe) composition', () => {
       const fnc = compose((val) => val + 2, (val) => val + 3, (val) => val + 4);
 
       assert.strictEqual(fnc(1), 10);

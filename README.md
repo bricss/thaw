@@ -3,7 +3,7 @@ The narrow belt for AOP 🎀
 This package provides narrow methods for aspect-oriented programming (AOP).
 
 ## Prerequisites
-* Node.js `>= 14.13.x`
+* Node.js `>= 14.x`
 
 ## Installation
 ```shell
