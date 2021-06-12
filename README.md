@@ -1,16 +1,19 @@
 The narrow belt for AOP 🎀
-----
+---
 This package provides narrow methods for aspect-oriented programming (AOP).
 
 ## Prerequisites
+
 * Node.js `>= 14.x`
 
 ## Installation
-```shell
+
+```bash
 npm install thaw --save
 ```
 
 ### Usage
+
 ```javascript
 import * as thaw from 'thaw';
 
@@ -33,7 +36,7 @@ setTimeout(debounce, 250); // will fire
 setTimeout(debounce, 300);
 setTimeout(debounce, 350); // will fire
 setTimeout(debounce, 400);
-setTimeout(() => console.assert(bip === 2, 'debounce'), 1000);
+setTimeout(() => console.assert(bip === 2, 'debounce'), 1e3);
 
 let pib = 0;
 const throttle = thaw.throttle(() => pib++, 100);
@@ -44,5 +47,5 @@ setTimeout(throttle, 250); // will fire
 setTimeout(throttle, 300);
 setTimeout(throttle, 350); // will fire
 setTimeout(throttle, 400);
-setTimeout(() => console.assert(pib === 3, 'throttle'), 1000);
+setTimeout(() => console.assert(pib === 3, 'throttle'), 1e3);
 ```

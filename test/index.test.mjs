@@ -1,4 +1,4 @@
-import assert from 'assert';
+import { strict as assert } from 'assert';
 import {
   after,
   around,
@@ -14,7 +14,7 @@ describe('thaw', () => {
     it('should call callback around a function', () => {
       const fnc = around((val) => val + 1, (val) => val + val);
 
-      assert.strictEqual(fnc(1), 6);
+      assert.equal(fnc(1), 6);
     });
   });
 
@@ -22,7 +22,7 @@ describe('thaw', () => {
     it('should call callback after a function', () => {
       const fnc = after((val) => val + 1, (val) => val + val);
 
-      assert.strictEqual(fnc(1), 4);
+      assert.equal(fnc(1), 4);
     });
   });
 
@@ -30,7 +30,7 @@ describe('thaw', () => {
     it('should call callback before a function', () => {
       const fnc = before((val) => val + 1, (val) => val + val);
 
-      assert.strictEqual(fnc(1), 3);
+      assert.equal(fnc(1), 3);
     });
   });
 
@@ -38,7 +38,7 @@ describe('thaw', () => {
     it('should call functions in left-to-right (pipe) composition', () => {
       const fnc = compose((val) => val + 2, (val) => val + 3, (val) => val + 4);
 
-      assert.strictEqual(fnc(1), 10);
+      assert.equal(fnc(1), 10);
     });
   });
 
@@ -53,7 +53,7 @@ describe('thaw', () => {
       setTimeout(fnc, 300);
       setTimeout(fnc, 350); // will fire
       setTimeout(fnc, 400);
-      setTimeout(() => (assert.strictEqual(bip, 2), done()), 1000);
+      setTimeout(() => (assert.equal(bip, 2), done()), 1e3);
     });
   });
 
@@ -68,7 +68,7 @@ describe('thaw', () => {
       setTimeout(fnc, 300);
       setTimeout(fnc, 350); // will fire
       setTimeout(fnc, 400);
-      setTimeout(() => (assert.strictEqual(pib, 3), done()), 1000);
+      setTimeout(() => (assert.equal(pib, 3), done()), 1e3);
     });
   });
 
