@@ -1,6 +1,6 @@
 The narrow belt for AOP 🎀
 ---
-This package provides narrow methods for aspect-oriented programming (AOP).
+This package provides **narrow-trench** methods for aspect-oriented programming (AOP).
 
 ## Prerequisites
 
