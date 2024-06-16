@@ -58,9 +58,9 @@ describe('thaw', () => {
 
       setTimeout(fnc, 0);
       setTimeout(fnc, 100);
-      setTimeout(fnc, 250); // will fire
+      setTimeout(fnc, 250); // pragma: will fire
       setTimeout(fnc, 300);
-      setTimeout(fnc, 350); // will fire
+      setTimeout(fnc, 350); // pragma: will fire
       setTimeout(fnc, 400);
       setTimeout(() => (assert.equal(bip, 2), done()), 1e3);
     });
@@ -73,11 +73,11 @@ describe('thaw', () => {
       let pib = 0;
       const fnc = throttle(() => pib++, 100);
 
-      setTimeout(fnc, 0); // will fire
+      setTimeout(fnc, 0); // pragma: pragma: will fire
       setTimeout(fnc, 100);
-      setTimeout(fnc, 250); // will fire
+      setTimeout(fnc, 250); // pragma: will fire
       setTimeout(fnc, 300);
-      setTimeout(fnc, 350); // will fire
+      setTimeout(fnc, 350); // pragma: will fire
       setTimeout(fnc, 400);
       setTimeout(() => (assert.equal(pib, 3), done()), 1e3);
     });
