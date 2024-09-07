@@ -8,15 +8,15 @@
     "url": "https://github.com/bricss/thaw/issues"
   },
   "devDependencies": {
-    "@babel/cli": "^7.24.8",
-    "@babel/core": "^7.24.9",
-    "@babel/eslint-parser": "^7.25.0",
-    "@babel/preset-env": "^7.25.0",
-    "@stylistic/eslint-plugin-js": "^2.3.0",
+    "@babel/cli": "^7.25.6",
+    "@babel/core": "^7.25.2",
+    "@babel/eslint-parser": "^7.25.1",
+    "@babel/preset-env": "^7.25.4",
+    "@stylistic/eslint-plugin-js": "^2.7.2",
     "c8": "^10.1.2",
-    "eslint": "^9.8.0",
-    "eslint-config-ultra-refined": "^3.1.3",
-    "mocha": "^10.7.0"
+    "eslint": "^9.10.0",
+    "eslint-config-ultra-refined": "^3.2.5",
+    "mocha": "^10.7.3"
   },
   "description": "The narrow belt for AOP 🎀",
   "engines": {
@@ -50,5 +50,5 @@
     "test": "mocha --exit --recursive",
     "test:cover": "c8 --include=src --reporter=lcov --reporter=text npm test"
   },
-  "version": "4.0.5"
+  "version": "4.0.6"
 }
