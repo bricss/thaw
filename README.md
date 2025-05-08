@@ -4,7 +4,7 @@ This package provides **narrow-trench** methods for aspect-oriented programming 
 
 ## Prerequisites
 
-* Node.js `>= 18.x`
+* Node.js `>= 20.x`
 
 ## Installation
 
