@@ -2,6 +2,14 @@ The narrow belt for AOP 🎀
 ---
 This package provides **narrow-trench** methods for aspect-oriented programming (AOP).
 
+## Abstract
+
+* Consistent advice pattern semantics 📐
+* Deterministic behavior (tested with mocked timers) ⚖️
+* Preserves `this` context 🔒
+* Small, predictable behavior 🎯
+* Zero dependencies 🗽
+
 ## Prerequisites
 
 * Node.js `>= 20.0.0`
@@ -15,37 +23,97 @@ npm install thaw --save
 ### Usage
 
 ```javascript
-import * as thaw from 'thaw';
+import {
+  after,
+  afterReturning,
+  afterThrowing,
+  around,
+  before,
+  debounce,
+  pipe,
+  throttle,
+} from 'thaw';
 
-const around = thaw.around((val) => val + 1, (val) => val + val);
-const after = thaw.after((val) => val + 1, (val) => val + val);
-const before = thaw.before((val) => val + 1, (val) => val + val);
-const compose = thaw.compose(around, after, before);
+{
+  const fn = after(
+    (v) => v + 1,
+    (...args) => console.log('args passed to fn', args), // [ 1 ]
+  );
 
-console.assert(around(1) === 6, 'around');
-console.assert(after(1) === 4, 'after');
-console.assert(before(1) === 3, 'before');
-console.assert(compose(1) === 29, 'compose');
+  console.log('after', fn(1)); // 2
+}
 
-let bip = 0;
-const debounce = thaw.debounce(() => bip++, 100);
+{
+  const fn = afterReturning(
+    (a, b) => a + b,
+    (result, ...args) => `${ result }-${ args }`,
+  );
 
-setTimeout(debounce, 0);
-setTimeout(debounce, 100);
-setTimeout(debounce, 250); // will fire
-setTimeout(debounce, 300);
-setTimeout(debounce, 350); // will fire
-setTimeout(debounce, 400);
-setTimeout(() => console.assert(bip === 2, 'debounce'), 1e3);
+  console.log('afterReturning', fn(2, 3)); // 5-2,3
+}
 
-let pib = 0;
-const throttle = thaw.throttle(() => pib++, 100);
+{
+  const fn = afterThrowing(
+    () => { throw new Error('boom'); },
+    (err, ...args) => console.error('afterThrowing', `${ err.message }-${ args }`), // boom-2,3
+  );
 
-setTimeout(throttle, 0); // will fire
-setTimeout(throttle, 100);
-setTimeout(throttle, 250); // will fire
-setTimeout(throttle, 300);
-setTimeout(throttle, 350); // will fire
-setTimeout(throttle, 400);
-setTimeout(() => console.assert(pib === 3, 'throttle'), 1e3);
+  try {
+    fn(2, 3);
+  } catch (err) {
+    console.error('afterThrowing', err.message); // boom
+  }
+}
+
+{
+  const fn = around(
+    (v) => v + 1,
+    (proceed, ...args) => proceed() + args.at(0),
+  );
+
+  console.log('around', fn(1)); // 3
+}
+
+{
+  const fn = before(
+    (v) => v + 1,
+    (...args) => console.log('args passed to fn', args), // [ 1 ]
+  );
+
+  console.log('before', fn(1)); // 2
+}
+
+{
+  const fn = debounce((v) => {
+    console.log('debounce', v); // 3; after -> 200ms
+  }, 200);
+
+  fn(1);
+  fn(2);
+  fn(3);
+}
+
+{
+  const fn = pipe(
+    (v) => v + 2,
+    (v) => v + 3,
+    (v) => v + 4,
+  );
+
+  console.log('pipe', fn(1)); // 10
+}
+
+{
+  const fn = throttle((v) => {
+    console.log('throttle', v); // 1; idle -> 200ms
+  }, 200);
+
+  fn(1);
+  fn(2);
+  fn(3);
+}
 ```
+
+---
+
+For more details, please check tests in the repository.
