@@ -37,7 +37,7 @@ import {
 {
   const fn = after(
     (v) => v + 1,
-    (...args) => console.log('args passed to fn', args), // [ 1 ]
+    (...args) => console.log('after fn args', args), // [ 1 ]
   );
 
   console.log('after', fn(1)); // 2
@@ -55,13 +55,15 @@ import {
 {
   const fn = afterThrowing(
     () => { throw new Error('boom'); },
-    (err, ...args) => console.error('afterThrowing', `${ err.message }-${ args }`), // boom-2,3
+    (err, ...args) => {
+      console.error('afterThrowing', `${ err.message }-${ args }`); // Boom-2,3
+    },
   );
 
   try {
     fn(2, 3);
   } catch (err) {
-    console.error('afterThrowing', err.message); // boom
+    console.error('afterThrowing', err.message); // Boom
   }
 }
 
@@ -77,7 +79,7 @@ import {
 {
   const fn = before(
     (v) => v + 1,
-    (...args) => console.log('args passed to fn', args), // [ 1 ]
+    (...args) => console.log('before fn args', args), // [ 1 ]
   );
 
   console.log('before', fn(1)); // 2

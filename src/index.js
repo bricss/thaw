@@ -1,10 +1,10 @@
 export const after = (fn, advice) => {
   return function (...args) {
-    const result = fn.apply(this, args);
-
-    advice.apply(this, args);
-
-    return result;
+    try {
+      return fn.apply(this, args);
+    } finally {
+      advice.apply(this, args);
+    }
   };
 };
 
