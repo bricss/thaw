@@ -11,9 +11,9 @@ import {
   throttle,
 } from '../src/index.js';
 
-describe('thaw', () => {
+describe('given thaw', () => {
 
-  describe('after', () => {
+  describe('using after()', () => {
 
     it('should call advice after a function', () => {
       let called = false;
@@ -86,7 +86,7 @@ describe('thaw', () => {
 
   });
 
-  describe('afterReturning', () => {
+  describe('using afterReturning()', () => {
 
     it('should pass result and arguments to advice', () => {
       const fn = afterReturning(
@@ -123,7 +123,7 @@ describe('thaw', () => {
 
   });
 
-  describe('afterThrowing', () => {
+  describe('using afterThrowing()', () => {
 
     it('should call advice when function throws', () => {
       const errors = [];
@@ -172,7 +172,7 @@ describe('thaw', () => {
 
   });
 
-  describe('around', () => {
+  describe('using around()', () => {
 
     it('should call advice around a function', () => {
       const fn = around(
@@ -244,7 +244,7 @@ describe('thaw', () => {
 
   });
 
-  describe('before', () => {
+  describe('using before()', () => {
 
     it('should call advice before function', () => {
       let called = false;
@@ -293,7 +293,7 @@ describe('thaw', () => {
 
   });
 
-  describe('debounce', () => {
+  describe('using debounce()', () => {
 
     beforeEach(() => {
       mock.timers.enable({ apis: ['setTimeout'] });
@@ -364,7 +364,7 @@ describe('thaw', () => {
 
   });
 
-  describe('pipe', () => {
+  describe('using pipe()', () => {
 
     it('should pipe left-to-right', () => {
       const fn = pipe(
@@ -446,7 +446,7 @@ describe('thaw', () => {
 
   });
 
-  describe('throttle', () => {
+  describe('using throttle()', () => {
 
     beforeEach(() => {
       mock.timers.enable({ apis: ['setTimeout'] });
