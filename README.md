@@ -1,4 +1,4 @@
-The narrow belt for AOP 🎀
+The narrow belt for AOP 🥋
 ---
 This package provides **narrow-trench** methods for aspect-oriented programming (AOP).
 
@@ -12,7 +12,7 @@ This package provides **narrow-trench** methods for aspect-oriented programming 
 
 ## Prerequisites
 
-* Node.js `>= 20.0.0`
+* Node.js `>=20.0.0`
 
 ## Installation
 
