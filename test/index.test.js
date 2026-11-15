@@ -11,6 +11,10 @@ import {
   throttle,
 } from '../src/index.js';
 
+const boomRex = /boom/i;
+const kaboomRex = /kaboom/i;
+const selfRex = /self/i;
+
 describe('given thaw', () => {
 
   describe('using after()', () => {
@@ -101,11 +105,11 @@ describe('given thaw', () => {
       let called = false;
 
       const fn = afterReturning(
-        () => { throw new Error('boom'); },
+        () => { throw new Error('Boom'); },
         () => { called = true; },
       );
 
-      assert.throws(() => fn(), /boom/);
+      assert.throws(() => fn(), boomRex);
       assert.equal(called, false);
     });
 
@@ -128,12 +132,12 @@ describe('given thaw', () => {
     it('should call advice when function throws', () => {
       const errors = [];
       const fn = afterThrowing(
-        () => { throw new Error('boom'); },
+        () => { throw new Error('Boom'); },
         (err) => errors.push(err.message),
       );
 
-      assert.throws(() => fn(), /boom/);
-      assert.deepEqual(errors, ['boom']);
+      assert.throws(() => fn(), boomRex);
+      assert.deepEqual(errors, ['Boom']);
     });
 
     it('should not call advice when no error', () => {
@@ -149,11 +153,11 @@ describe('given thaw', () => {
 
     it('should rethrow error if advice throws', () => {
       const fn = afterThrowing(
-        () => { throw new Error('boom'); },
-        () => { throw new Error('kaboom'); },
+        () => { throw new Error('Boom'); },
+        () => { throw new Error('Kaboom'); },
       );
 
-      assert.throws(() => fn(), /kaboom/);
+      assert.throws(() => fn(), kaboomRex);
     });
 
     it('should preserve this context', () => {
@@ -163,11 +167,11 @@ describe('given thaw', () => {
           function () { throw new Error(this.tag); },
           function (err) { captured = `${ this.tag }-${ err.message }`; },
         ),
-        tag: 'self',
+        tag: 'Self',
       };
 
-      assert.throws(() => obj.method(), /self/);
-      assert.equal(captured, 'self-self');
+      assert.throws(() => obj.method(), selfRex);
+      assert.equal(captured, 'Self-Self');
     });
 
   });
